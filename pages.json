@@ -1,0 +1,170 @@
+{
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "微信",
+				"navigationStyle": "custom"
+			}
+		}
+	    ,{
+            "path" : "pages/chat_info/chat_info",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/search/search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/txl/txl",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "通讯录",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/find/find",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/my",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/setting-user/setting-user",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设置您的头像及名称",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/service/service",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/qianbao/qianbao",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/lqmx/lqmx",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/setting-order/setting-order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "账单设置",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/how_to_use/how_to_use",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "使用帮助",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/tingji/tingji",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"navigationBarBackgroundColor": "white"
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+	"tabBar": {
+		"selectedColor": "#08bf62",
+		"iconWidth": "31",
+		"color": "#333",
+		"list": [
+			{
+				"iconPath": "static/weixin.png",
+				"selectedIconPath": "static/weixin-full.png",
+				"pagePath": "pages/index/index",
+				"text": "微信"
+			},
+			{
+				"iconPath": "static/txl.png",
+				"pagePath": "pages/txl/txl",
+				"selectedIconPath": "static/txl-full.png",
+				"text": "通讯录"
+			},
+			{
+				"iconPath": "static/find.png",
+				"pagePath": "pages/find/find",
+				"selectedIconPath": "static/find-full.png",
+				"text": "发现"
+			},
+			{
+				"iconPath": "static/user.png",
+				"pagePath": "pages/my/my",
+				"selectedIconPath": "static/user-full.png",
+				"text": "我"
+			}
+		]
+	}
+}

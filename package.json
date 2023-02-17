@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "uuid": "^9.0.0",
+    "uview-ui": "^2.0.35",
+    "vant": "^2.12.53"
+  },
+  "devDependencies": {
+    "vite": "^3.2.5"
+  }
+}
