@@ -7,7 +7,7 @@
 		<view v-for="(in_list,index) in list_data" :key="index">
 			<u-cell-group :customStyle="{backgroundColor:'#fff'}" :border="false">
 				<u-cell v-for="(item,i) in in_list" :key="i" :title="item.title" :isLink="true"
-					:titleStyle="{marginLeft:'20rpx'}">
+					:titleStyle="{marginLeft:'20rpx'}" @click="item.click ? jump(item):''">
 					<text slot="value" class="lq">
 						{{item.title === '零钱' ? '￥'+values : '' }}
 					</text>
@@ -61,7 +61,9 @@
 					}],
 					[{
 							title: "身份信息",
-							name: "/static/qianbao/sfxx.png"
+							name: "/static/qianbao/sfxx.png",
+							click:true,
+							url:'pages/sfxx/sfxx'
 						},
 						{
 							title: "支付设置",
@@ -78,6 +80,11 @@
 				uni.$u.route({
 					url: 'pages/lqmx/lqmx'
 				})
+			},
+			jump(e){
+ 				uni.$u.route(e.url, {
+					show: 'lisa',
+				});
 			}
 		},
 		onShow() {

@@ -52,7 +52,7 @@
 			
 			<u-gap height="10" bgColor="#f2f2f3"></u-gap>
 			<u-cell-group :customStyle="{backgroundColor:'#fff'}" :border="false">
-				<u-cell  title="设置" :isLink="true" :titleStyle="{marginLeft:'20rpx'}" :border="false">
+				<u-cell  title="设置" :isLink="true" :titleStyle="{marginLeft:'20rpx'}" :border="false" @click="settingss_">
 					<u-icon slot="icon" size="24" name="/static/m-set.png"></u-icon>
 				</u-cell>
 			</u-cell-group>
@@ -88,10 +88,19 @@
 			},
 			fuwu_func(){
 				console.log("服务");
+				const login = uni.getStorageSync('login');
+				if(login){
+					uni.$u.route({
+						url : "pages/service/service"
+					})
+				}
+				
+			},
+			settingss_ (){
 				uni.$u.route({
-					url : "pages/service/service"
+					url : "pages/settings/settings"
 				})
-			}
+			},
 		},
 		onShow() {
 			this.create_uuid__()

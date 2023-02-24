@@ -5,7 +5,7 @@
 		</u-navbar>
 
 
-		<view slot="title">
+		<view >
 			<view class="all_order">
 				<view class="but" @tap="all_bill">
 					<view>
@@ -15,7 +15,7 @@
 						<u-icon name="arrow-down-fill" size="10" top="5"></u-icon>
 					</view>
 				</view>
-				<view slot="value" class="tj" @click="tongji">
+				<view  class="tj" @click="tongji">
 					<view>
 						统计
 					</view>
@@ -27,33 +27,35 @@
 		</view>
 
 		<u-gap height="70"></u-gap>
+		<!-- {{zd_list_tmp}} -->
 		<view class="info" v-for="(item,index) in zd_list_tmp" :key="index">
+			<!-- {{item}} -->
 			<u-sticky offsetTop="140">
 				<view class="info1 dis">
 					<view class="times_" @click="choose_time(item.time)">
-						{{item.time}}
+						{{item.year+ "年"+ item.month+"月"}}
 						<u-icon name="arrow-down" size="12" top="0" color="#333" :bold="true"></u-icon>
 					</view>
 					<view class="all color_ font_26">
-						支出￥{{item.all_out}} 收入￥{{item.all_in}}
+						支出￥{{item.total_out}} 收入￥{{item.total_in}}
 					</view>
 				</view>
 			</u-sticky>
-			<view class="" v-for="(item2,index2) in item.detial" :key="index2">
+			<view class="" v-for="(item2,index2) in item.items" :key="index2">
 				<view class="moneys dis bg">
 					<view class="avatar">
-						<u-avatar :src="item2.avatarurl" size="42"></u-avatar>
+						<u-avatar :src="item2.item.avatarurl" size="42"></u-avatar>
 					</view>
 					<view class="nick">
 						<view class="nickname">
-							{{item2.nickname}}
+							<text  class="u-line-1">{{item2.item.nickname}}</text >
 						</view>
 						<view class="nick_time color_ font_26">
-							{{item2.nickname_time}}
+							{{item2.item.nickname_time}}
 						</view>
 					</view>
-					<view class="money_money">
-						{{item2.inout}}
+					<view class="money_money" :class="item2.item.in_out !== 0 ? bbclass:''">
+						{{item2.item.in_out == 0 ? "-" + item2.item.price : "+" +item2.item.price}}
 					</view>
 				</view>
 
@@ -75,13 +77,15 @@
 </template>
 
 <script>
+	import {get_bill} from '@/config/api.js'
 	export default {
 		data() {
 			return {
 				zd_list: [],
 				zd_list_tmp : [],
 				picker_show: false,
-				picker_value: ""
+				picker_value: "",
+				bbclass : 'sukiyou_aubn2389fn29'
 			};
 		},
 		methods: {
@@ -149,25 +153,30 @@
 				uni.$u.route({
 					url : "pages/tingji/tingji"
 				})
+			},
+			get_bill__(){
+				let userinfo = uni.getStorageSync('login-info')
+				let username = userinfo.username
+				get_bill({
+					username : username,
+					datetime : this.datetime,
+					page : "",
+					limit : "",
+				}).then((res)=>{
+					console.log("lqmx  get_bill__=>",res);
+					this.zd_list = res
+					this.zd_list_tmp = this.zd_list
+					// uni.hideToast();
+				})
 			}
 		},
 		onShow() {
 			uni.showToast({
 				icon: 'loading',
 				title: '加载中',
-				duration: 2000,
+				duration: 5000,
 				success:()=>{
-					try {
-						const value = uni.getStorageSync('zd_list');
-						if (value) {
-							console.log(value);
-							this.zd_list = value
-							
-							this.zd_list_tmp = this.zd_list
-						}
-					} catch (e) {
-						// error
-					}
+					this.get_bill__()
 				}
 			});
 			
@@ -275,6 +284,9 @@
 
 	.asdfsd {
 		z-index: 9999999;
+	}
+	.sukiyou_aubn2389fn29{
+		color: #ffb011;
 	}
 </style>
 <style>

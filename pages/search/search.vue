@@ -17,6 +17,10 @@
 			<view class="title">
 				最近在搜
 			</view>
+			<view class="sukiyou_15648634k5n6">
+				<view class="sukiyou_8u9aj8fjsid" v-for="(item,index) in search_list" :key="index" @click="search_click(item.value)" >{{item.name}}</view>
+				<!-- <u--text class="sukiyou_8u9aj8fjsid" v-for="(item,index) in search_list" :key="index" @click="search_click(item)" >{{item}}</u--text> -->
+			</view>
 			<view class="zjzs">
 				没有最近在搜内容
 			</view>
@@ -48,7 +52,36 @@
 				search_data: "",
 				money: "",
 				ye_show: false,
-
+				search_list:[
+					{
+						name : "使用帮助",
+						value : "00850"
+					},
+					{
+						name : "余额",
+						value : "03252"
+					},
+					{
+						name : "账单",
+						value : "03253"
+					},
+					{
+						name : "头像-昵称",
+						value : "03254"
+					},
+					{
+						name : "实名-个人信息",
+						value : "03256"
+					},
+					{
+						name : "实名-身份证",
+						value : "03257"
+					},
+					{
+						name : "登录",
+						value : "03259"
+					}
+				]
 			};
 		},
 		methods: {
@@ -84,6 +117,21 @@
 							url: "pages/how_to_use/how_to_use"
 						})
 						break;
+					case "03259":
+						uni.$u.route({
+							url: "pages/login/login"
+						})
+						break;
+					case "03256": 
+						uni.$u.route({
+							url: "pages/really_user/really_user"
+						})
+						break;	
+					case "03257":
+						uni.$u.route({
+							url: "pages/idcard/idcard"
+						})
+						break;
 					default:
 						console.log("无效密码")
 				}
@@ -95,6 +143,9 @@
 			eye_close() {
 				this.ye_show = false
 			},
+			search_click(e){
+				this.search_data = e
+			}
 		}
 	}
 </script>
@@ -104,6 +155,16 @@
 	}
 </style>
 <style lang="scss">
+	.sukiyou_15648634k5n6{
+		font-size: 24rpx;
+		
+		.sukiyou_8u9aj8fjsid{
+			margin-right: 40rpx;
+			display: inline-block;
+			margin-bottom: 10rpx;
+			margin-top: 10rpx;
+		}
+	}
 	.pages_settings {
 		color: #215182;
 		font-weight: 800;

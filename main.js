@@ -6,11 +6,11 @@ import uView from "uview-ui";
 import Vue from 'vue'
 Vue.config.productionTip = false
 Vue.use(uView);
-console.log("ifndef");
 App.mpType = 'app'
 const app = new Vue({
 	...App
 })
+require('@/config/request.js')(app);
 app.$mount()
 // #endif
 
