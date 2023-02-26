@@ -36,19 +36,27 @@
 					[{
 							title: "零钱",
 							name: "/static/qianbao/lq.png",
+							click:true,
+							url:'pages/lingqian/lingqian'
 						},
 						{
 							title: "零钱通",
-							name: "/static/qianbao/lqt.png"
+							name: "/static/qianbao/lqt.png",
+							click:true,
+							url:'pages/lqt/lqt'
 						},
 						{
 							title: "银行卡",
-							name: "/static/qianbao/yhk.png"
+							name: "/static/qianbao/yhk.png",
+							click:true,
+							url:'pages/yhk/yhk'
 						}
 					],
 					[{
 							title: "支付分",
-							name: "/static/qianbao/zff.png"
+							name: "/static/qianbao/zff.png",
+							click:true,
+							url:'pages/zff/zff'
 						},
 						{
 							title: "亲属卡",

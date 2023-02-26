@@ -5,8 +5,9 @@ module.exports = (vm) => {
 		console.log("http:set");
         /* config 为默认全局配置*/
 		// http://lzms.rubyonly.cn/lzms
-        config.baseURL = 'http://192.168.2.20:12369/'; /* 根域名 */
-        // config.baseURL = 'http://222.186.150.48:20233'; /* 根域名 */
+        // config.baseURL = 'http://192.168.2.20:12369/'; /* 根域名 */
+        // config.baseURL = 'http://192.168.101.200:12369/'; /* 根域名 */
+        config.baseURL = 'http://222.186.150.48:20233'; /* 根域名 */
         return config
     })
 	

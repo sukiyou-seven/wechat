@@ -5,7 +5,7 @@
 		</u-navbar>
 
 
-		<view >
+		<view>
 			<view class="all_order">
 				<view class="but" @tap="all_bill">
 					<view>
@@ -15,7 +15,7 @@
 						<u-icon name="arrow-down-fill" size="10" top="5"></u-icon>
 					</view>
 				</view>
-				<view  class="tj" @click="tongji">
+				<view class="tj" @click="tongji">
 					<view>
 						统计
 					</view>
@@ -30,7 +30,7 @@
 		<!-- {{zd_list_tmp}} -->
 		<view class="info" v-for="(item,index) in zd_list_tmp" :key="index">
 			<!-- {{item}} -->
-			<u-sticky offsetTop="140">
+			<u-sticky :offsetTop="offsetTop">
 				<view class="info1 dis">
 					<view class="times_" @click="choose_time(item.time)">
 						{{item.year+ "年"+ item.month+"月"}}
@@ -48,7 +48,7 @@
 					</view>
 					<view class="nick">
 						<view class="nickname">
-							<text  class="u-line-1">{{item2.item.nickname}}</text >
+							<text class="u-line-1">{{item2.item.nickname}}</text>
 						</view>
 						<view class="nick_time color_ font_26">
 							{{item2.item.nickname_time}}
@@ -69,23 +69,27 @@
 		<u-popup :show="picker_show" @close="close" @open="open">
 			<view>
 				<u-datetime-picker :show="picker_show" v-model="picker_value" mode="year-month" :sukiyou_toolbar="true"
-					@confirm="confirm" @cancel="cancel" :maxDate = "Number(new Date())"
-					:showToolbar="false"></u-datetime-picker>
+					@confirm="confirm" @cancel="cancel" :maxDate="Number(new Date())" :showToolbar="false">
+				</u-datetime-picker>
 			</view>
 		</u-popup>
 	</view>
 </template>
 
 <script>
-	import {get_bill} from '@/config/api.js'
+	import {
+		get_bill
+	} from '@/config/api.js'
 	export default {
 		data() {
 			return {
 				zd_list: [],
-				zd_list_tmp : [],
+				zd_list_tmp: [],
 				picker_show: false,
 				picker_value: "",
-				bbclass : 'sukiyou_aubn2389fn29'
+				bbclass: 'sukiyou_aubn2389fn29',
+				show_options : 0,
+				offsetTop : 140
 			};
 		},
 		methods: {
@@ -98,25 +102,25 @@
 				var year = t[0]
 				var month = t[1].replace('月', '')
 				console.log(year, month);
-				var b = year + "-" + month 
+				var b = year + "-" + month
 				this.picker_value = b
 				this.picker_show = true
 			},
 			rightClick() {
 				console.log("asdf");
 				// 测试 排序
-				this.zd_list_tmp.sort((a,b)=>{
-					return b.year-a.year
+				this.zd_list_tmp.sort((a, b) => {
+					return b.year - a.year
 				})
 				console.log(this.zd_list_tmp);
-				
+
 			},
-			numtoymd(e){
-				
+			numtoymd(e) {
+
 				var date = new Date(e);
 				var Y = date.getFullYear() + '-';
-				var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1);
-				return Y+M
+				var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+				return Y + M
 			},
 			confirm(e) {
 				// 根据选择时间 将更晚的数据剔除
@@ -124,46 +128,46 @@
 				this.zd_list_tmp = []
 				var time = this.numtoymd(e.value)
 				var t = time.split('-')
-				var time_ = t[0]+"年"+t[1]+"月"
+				var time_ = t[0] + "年" + t[1] + "月"
 				var year = Number(t[0])
 				var month = Number(t[1])
-				
-				tmp_zd_list.forEach((item)=>{
+
+				tmp_zd_list.forEach((item) => {
 					// var tmp_ = item.time.split('年')
 					var tmp_year = item.year
 					var tmp_month = item.month
-					console.log(year,month,tmp_year,tmp_month);
-					if (year < tmp_year){
+					console.log(year, month, tmp_year, tmp_month);
+					if (year < tmp_year) {
 						// 选择年份 小于 数据年份 数据被需要
 						this.zd_list_tmp.push(item)
-					}else if(year = tmp_year){
-						if (month <= tmp_month){
+					} else if (year = tmp_year) {
+						if (month <= tmp_month) {
 							//  选择年份 等于 数据年份 月份是否小于
 							this.zd_list_tmp.push(item)
 						}
 					}
 				})
-				
+
 				this.picker_show = false
 			},
 			cancel() {
 				this.picker_show = false
 			},
-			tongji(){
+			tongji() {
 				uni.$u.route({
-					url : "pages/tingji/tingji"
+					url: "pages/tingji/tingji"
 				})
 			},
-			get_bill__(){
+			get_bill__() {
 				let userinfo = uni.getStorageSync('login-info')
 				let username = userinfo.username
 				get_bill({
-					username : username,
-					datetime : this.datetime,
-					page : "",
-					limit : "",
-				}).then((res)=>{
-					console.log("lqmx  get_bill__=>",res);
+					username: username,
+					datetime: this.datetime,
+					page: "",
+					limit: "",
+				}).then((res) => {
+					console.log("lqmx  get_bill__=>", res);
 					this.zd_list = res
 					this.zd_list_tmp = this.zd_list
 					// uni.hideToast();
@@ -171,15 +175,25 @@
 			}
 		},
 		onShow() {
+			// this.offsetTop = 140
 			uni.showToast({
 				icon: 'loading',
 				title: '加载中',
 				duration: 5000,
-				success:()=>{
+				success: () => {
 					this.get_bill__()
 				}
 			});
-			
+
+		},
+		onLoad(options) {
+			this.offsetTop = 140
+			try {
+				this.show_options = options.abc
+
+			} catch (e) {
+				//TODO handle the exception
+			}
 		}
 	}
 </script>
@@ -285,7 +299,8 @@
 	.asdfsd {
 		z-index: 9999999;
 	}
-	.sukiyou_aubn2389fn29{
+
+	.sukiyou_aubn2389fn29 {
 		color: #ffb011;
 	}
 </style>
